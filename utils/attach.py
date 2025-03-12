@@ -1,7 +1,7 @@
 import allure
 from allure_commons.types import AttachmentType
 
-from conftest import selenoid_url
+from utils.config import selenoid_url
 
 
 # Скриншоты

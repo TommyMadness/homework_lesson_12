@@ -1,22 +1,9 @@
-import os
-
 import pytest
-from dotenv import load_dotenv
 from selene.support.shared import browser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
 from utils import attach
-
-
-@pytest.fixture(scope="session", autouse=True)
-def load_env():
-    load_dotenv()
-
-
-selenoid_login = os.getenv("SELENOID_LOGIN")
-selenoid_pass = os.getenv("SELENOID_PASS")
-selenoid_url = os.getenv("SELENOID_URL")
+from utils.config import selenoid_url, selenoid_login, selenoid_pass
 
 
 DEFAULT_BROWSER_VERSION = "100.0"
@@ -54,7 +41,7 @@ def setup_browser(request):
         options=options,
     )
 
-    yield
+    yield browser
     browser.quit()
 
 
