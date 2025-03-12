@@ -1,17 +1,23 @@
 import os
 
 import pytest
+from dotenv import load_dotenv
 from selene.support.shared import browser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from utils import attach
-from utils.config import selenoid_url, selenoid_login, selenoid_pass
 
 
-DEFAULT_BROWSER_VERSION = os.getenv("BROWSER_VERSION", "100.0")
+DEFAULT_BROWSER_VERSION = "100.0"
+
 
 def pytest_addoption(parser):
     parser.addoption("--browser_version", default=DEFAULT_BROWSER_VERSION)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def load_env():
+    load_dotenv()
 
 
 @pytest.fixture(scope="function")
@@ -37,8 +43,11 @@ def setup_browser(request):
     }
 
     options.capabilities.update(selenoid_capabilities)
+
+    login = os.getenv("LOGIN")
+    password = os.getenv("PASSWORD")
     browser.config.driver = webdriver.Remote(
-        command_executor=f"https://{selenoid_login}:{selenoid_pass}@{selenoid_url}/wd/hub",
+        command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
         options=options,
     )
 
