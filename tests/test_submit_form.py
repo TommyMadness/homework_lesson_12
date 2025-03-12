@@ -5,12 +5,7 @@ from selene import browser, have, be, command
 from conftest import setup_browser
 
 
-@allure.tag("web")
-@allure.severity(Severity.CRITICAL)
-@allure.label("owner", "atansan")
-@allure.feature("Задачи в репозитории")
-@allure.story("Проверяем сабмит через send keys")
-@allure.link("https://demoqa.com/automation-practice-form", name="Testing")
+@allure.title("Successful fill form_1")
 def test_submit_practice_form_by_using_send_keys(setup_browser):
     browser = setup_browser
 
@@ -72,12 +67,7 @@ def test_submit_practice_form_by_using_send_keys(setup_browser):
         browser.element(".table").should(have.text("NCR Delhi"))
 
 
-@allure.tag("web")
-@allure.severity(Severity.CRITICAL)
-@allure.label("owner", "atansan")
-@allure.feature("Задачи в репозитории")
-@allure.story("Проверяем сабмит через type")
-@allure.link("https://demoqa.com/automation-practice-form", name="Testing")
+@allure.title("Successful fill form_2")
 def test_submit_practice_form_by_using_type(setup_browser):
     browser = setup_browser
 
