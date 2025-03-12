@@ -2,6 +2,8 @@ import allure
 from allure_commons.types import Severity
 from selene import browser, have, be, command
 
+from conftest import setup_browser
+
 
 @allure.tag("web")
 @allure.severity(Severity.CRITICAL)
@@ -9,7 +11,9 @@ from selene import browser, have, be, command
 @allure.feature("Задачи в репозитории")
 @allure.story("Проверяем сабмит через send keys")
 @allure.link("https://demoqa.com/automation-practice-form", name="Testing")
-def test_submit_practice_form_by_using_send_keys():
+def test_submit_practice_form_by_using_send_keys(setup_browser):
+    browser = setup_browser
+
     with allure.step("Открываем главную страницу"):
         browser.open("https://demoqa.com/automation-practice-form")
 
