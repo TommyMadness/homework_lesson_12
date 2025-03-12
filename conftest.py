@@ -14,7 +14,7 @@ def pytest_addoption(parser):
     parser.addoption("--browser_version", default=DEFAULT_BROWSER_VERSION)
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def setup_browser(request):
     browser_version = request.config.getoption("--browser_version")
     browser_version = (
