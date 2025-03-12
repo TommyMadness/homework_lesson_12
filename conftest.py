@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from selene.support.shared import browser
 from selenium import webdriver
@@ -6,8 +8,7 @@ from utils import attach
 from utils.config import selenoid_url, selenoid_login, selenoid_pass
 
 
-DEFAULT_BROWSER_VERSION = "100.0"
-
+DEFAULT_BROWSER_VERSION = os.getenv("BROWSER_VERSION", "100.0")
 
 def pytest_addoption(parser):
     parser.addoption("--browser_version", default=DEFAULT_BROWSER_VERSION)
