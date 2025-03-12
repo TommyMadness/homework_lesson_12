@@ -78,7 +78,9 @@ def test_submit_practice_form_by_using_send_keys(setup_browser):
 @allure.feature("Задачи в репозитории")
 @allure.story("Проверяем сабмит через type")
 @allure.link("https://demoqa.com/automation-practice-form", name="Testing")
-def test_submit_practice_form_by_using_type():
+def test_submit_practice_form_by_using_type(setup_browser):
+    browser = setup_browser
+
     with allure.step("Открываем главную страницу"):
         browser.open("https://demoqa.com/automation-practice-form")
 

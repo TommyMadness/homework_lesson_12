@@ -19,12 +19,19 @@ selenoid_pass = os.getenv("SELENOID_PASS")
 selenoid_url = os.getenv("SELENOID_URL")
 
 
+DEFAULT_BROWSER_VERSION = "100.0"
+
+
 def pytest_addoption(parser):
     parser.addoption("--browser_version", default="100.0")
 
 
-@pytest.fixture(scope="function", autouse=True)
+@pytest.fixture(scope="session")
 def setup_browser(request):
+    browser_version = request.config.getoption("--browser_version")
+    browser_version = (
+        browser_version if browser_version != "" else DEFAULT_BROWSER_VERSION
+    )
     browser.config.base_url = "https://demoqa.com/automation-practice-form"
     driver_options = webdriver.ChromeOptions()
     driver_options.page_load_strategy = "eager"
@@ -34,7 +41,6 @@ def setup_browser(request):
     # driver_options = webdriver.ChromeOptions()   #настройка чтоб не открывать браузер , надо для этого 8 , 10 строчку кода
     # driver_options.add_argument('--headless')
 
-    browser_version = request.config.getoption("--browser_version")
     options = Options()
     selenoid_capabilities = {
         "browserName": "chrome",
