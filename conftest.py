@@ -20,7 +20,7 @@ def load_env():
     load_dotenv()
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def setup_browser(request):
     browser_version = request.config.getoption("--browser_version")
     browser_version = (
